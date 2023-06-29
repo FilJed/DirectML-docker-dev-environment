@@ -12,9 +12,14 @@ RUN pip install -U pip \
     && pip install \
     # common packages
     ipython ipykernel numpy pandas tensorboard matplotlib tqdm pyyaml \
-    #directml
+    # directml packages
     tensorflow-cpu>=2.9 tensorflow-directml-plugin
 
 WORKDIR /root/src
 
-RUN python -m venv --system-site-packages env $$ source ./bin/activate
+# adding extra packages
+COPY ../src/req.txt .
+
+RUN python -m venv --system-site-packages env $$ source ./env/bin/activate
+
+RUN pip install -r ./req.txt
