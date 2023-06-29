@@ -21,5 +21,4 @@ WORKDIR /root/src
 COPY ../src/req.txt .
 
 RUN python -m venv --system-site-packages env $$ source ./env/bin/activate
-
-RUN pip install -r ./req.txt
+    && pip install -r ./req.txt
