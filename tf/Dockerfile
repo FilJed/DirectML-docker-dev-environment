@@ -10,15 +10,18 @@ ENV PYTHONFAULTHANDLER=1 \
 
 RUN pip install -U pip \
     && pip install \
-    # common packages
-    ipython ipykernel numpy pandas tensorboard matplotlib tqdm pyyaml \
     # directml packages
-    tensorflow-cpu>=2.9 tensorflow-directml-plugin
+    tensorflow-cpu>=2.9 tensorflow-directml-plugin \
+    # common packages
+    ipython ipykernel numpy pandas tensorboard matplotlib tqdm pyyaml
 
 WORKDIR /root/src
 
 # adding extra packages
-COPY ../src/req.txt .
+COPY ./src/ .
 
-RUN python -m venv --system-site-packages env $$ source ./env/bin/activate
-    && pip install -r ./req.txt
+# RUN python3 -m venv --system-site-packages env 
+
+# RUN source ./env/bin/activate
+
+RUN pip install -r ./req.txt
